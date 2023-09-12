@@ -10,7 +10,7 @@ public class MemberSignUpResponse {
 
     private String nickname;
 
-    public static MemberSignUpResponse fromEntity(Member member) {
+    public static MemberSignUpResponse from(Member member) {
         return new MemberSignUpResponse(member.getId(), member.getEmail(), member.getNickname());
     }
 

@@ -10,7 +10,7 @@ public class MemberInfoResponse {
 
     private String nickname;
 
-    public static MemberInfoResponse fromEntity(Member member) {
+    public static MemberInfoResponse from(Member member) {
         return new MemberInfoResponse(member.getId(), member.getEmail(), member.getNickname());
     }
 

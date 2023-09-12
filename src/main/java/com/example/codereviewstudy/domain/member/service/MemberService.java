@@ -7,27 +7,27 @@ import com.example.codereviewstudy.domain.member.dto.request.MemberSignUpRequest
 import com.example.codereviewstudy.domain.member.dto.response.MemberInfoResponse;
 import com.example.codereviewstudy.domain.member.dto.response.MemberSignUpResponse;
 import com.example.codereviewstudy.domain.member.entity.Member;
-import com.example.codereviewstudy.domain.member.repository.MemberRepository;
+import com.example.codereviewstudy.domain.member.repository.MemberRepositoryInterface;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MemberService {
-    private final MemberRepository memberRepository;
 
-    public MemberService(MemberRepository memberRepository) {
+    private final MemberRepositoryInterface memberRepository;
+
+    @Autowired
+    public MemberService(MemberRepositoryInterface memberRepository) {
         this.memberRepository = memberRepository;
     }
 
     public MemberSignUpResponse signUp(MemberSignUpRequest request) {
-
-        boolean alreadyUseEmail = memberRepository
-                .existsByEmail(request.getEmail());
+        boolean alreadyUseEmail = memberRepository.existsByEmail(request.getEmail());
         if (alreadyUseEmail) {
             throw new DuplicatedUserEmailException();
         }
 
-        boolean alreadyUseNickname = memberRepository
-                .existsByNickName(request.getNickname());
+        boolean alreadyUseNickname = memberRepository.existsByNickName(request.getNickname());
         if (alreadyUseNickname) {
             throw new DuplicatedUserNickNameException();
         }
@@ -37,8 +37,7 @@ public class MemberService {
         String password = request.getPassword();
         String nickName = request.getNickname();
 
-        return MemberSignUpResponse
-                .fromEntity(memberRepository
+        return MemberSignUpResponse.from(memberRepository
                         .save(new Member(id, email, password, nickName)));
     }
 
@@ -50,7 +49,7 @@ public class MemberService {
         }
 
         return MemberInfoResponse
-                .fromEntity(memberRepository.findByEmail(email));
+                .from(memberRepository.findByEmail(email));
 
     }
 
