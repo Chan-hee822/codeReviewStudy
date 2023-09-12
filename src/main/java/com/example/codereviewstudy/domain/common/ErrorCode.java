@@ -21,4 +21,9 @@ public enum ErrorCode {
     public String getDescription() {
         return description;
     }
+
+    public void throwException() {
+        throw new IllegalArgumentException(description);
+    }
+
 }

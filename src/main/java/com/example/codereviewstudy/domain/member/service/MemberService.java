@@ -1,8 +1,6 @@
 package com.example.codereviewstudy.domain.member.service;
 
-import com.example.codereviewstudy.domain.exception.member.DuplicatedUserEmailException;
-import com.example.codereviewstudy.domain.exception.member.DuplicatedUserNickNameException;
-import com.example.codereviewstudy.domain.exception.member.UserNotFoundException;
+import com.example.codereviewstudy.domain.common.ErrorCode;
 import com.example.codereviewstudy.domain.member.dto.request.MemberSignUpRequest;
 import com.example.codereviewstudy.domain.member.dto.response.MemberInfoResponse;
 import com.example.codereviewstudy.domain.member.dto.response.MemberSignUpResponse;
@@ -24,12 +22,12 @@ public class MemberService {
     public MemberSignUpResponse signUp(MemberSignUpRequest request) {
         boolean alreadyUseEmail = memberRepository.existsByEmail(request.getEmail());
         if (alreadyUseEmail) {
-            throw new DuplicatedUserEmailException();
+            ErrorCode.Duplicate_Email.throwException();
         }
 
         boolean alreadyUseNickname = memberRepository.existsByNickName(request.getNickname());
         if (alreadyUseNickname) {
-            throw new DuplicatedUserNickNameException();
+            ErrorCode.Duplicate_NickName.throwException();
         }
 
         Long id = (long) (memberRepository.size() + 1);
@@ -45,7 +43,7 @@ public class MemberService {
 
         boolean alreadyUseEmail = memberRepository.existsByEmail(email);
         if (!alreadyUseEmail) {
-            throw new UserNotFoundException();
+            ErrorCode.User_Not_Found.throwException();
         }
 
         return MemberInfoResponse

@@ -1,9 +1,6 @@
 package com.example.codereviewstudy.domain.member.service;
 
 import com.example.codereviewstudy.domain.common.ErrorCode;
-import com.example.codereviewstudy.domain.exception.member.DuplicatedUserEmailException;
-import com.example.codereviewstudy.domain.exception.member.DuplicatedUserNickNameException;
-import com.example.codereviewstudy.domain.exception.member.UserNotFoundException;
 import com.example.codereviewstudy.domain.member.dto.request.MemberSignUpRequest;
 import com.example.codereviewstudy.domain.member.dto.response.MemberInfoResponse;
 import com.example.codereviewstudy.domain.member.dto.response.MemberSignUpResponse;
@@ -52,7 +49,7 @@ class MemberServiceTest {
                 .willReturn(true);
         //when
         RuntimeException exception =
-                assertThrows(DuplicatedUserEmailException.class, () ->
+                assertThrows(IllegalArgumentException.class, () ->
                         memberService.signUp(new MemberSignUpRequest(
                                 "BBB@BBB", "!@#$56", "gil")));
         //then
@@ -67,7 +64,7 @@ class MemberServiceTest {
                 .willReturn(true);
         //when
         RuntimeException exception =
-                assertThrows(DuplicatedUserNickNameException.class, () ->
+                assertThrows(IllegalArgumentException.class, () ->
                         memberService.signUp(new MemberSignUpRequest(
                                 "BBB@BBB", "!@#$56", "gil")));
         //then
@@ -98,7 +95,7 @@ class MemberServiceTest {
                 .willReturn(false);
         //when
         RuntimeException exception =
-                assertThrows(UserNotFoundException.class, () ->
+                assertThrows(IllegalArgumentException.class, () ->
                         memberService.getMemberInfo("AAA@CCC"));
         //then
         assertEquals(ErrorCode.User_Not_Found.getDescription()
