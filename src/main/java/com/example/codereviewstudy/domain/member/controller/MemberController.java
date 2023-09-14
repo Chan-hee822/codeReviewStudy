@@ -2,7 +2,6 @@ package com.example.codereviewstudy.domain.member.controller;
 
 import com.example.codereviewstudy.domain.member.dto.request.MemberSignUpRequest;
 import com.example.codereviewstudy.domain.member.dto.response.MemberInfoResponse;
-import com.example.codereviewstudy.domain.member.dto.response.MemberSignUpResponse;
 import com.example.codereviewstudy.domain.member.service.MemberService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +19,7 @@ public class MemberController {
     }
 
     @PostMapping("/signup")
-    public MemberSignUpResponse signUp(
+    public MemberInfoResponse signUp(
             @Valid @RequestBody MemberSignUpRequest request
     ) {
         return memberService.signUp(request);

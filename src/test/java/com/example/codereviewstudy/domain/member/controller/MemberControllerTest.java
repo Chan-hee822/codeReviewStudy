@@ -2,7 +2,6 @@ package com.example.codereviewstudy.domain.member.controller;
 
 import com.example.codereviewstudy.domain.member.dto.request.MemberSignUpRequest;
 import com.example.codereviewstudy.domain.member.dto.response.MemberInfoResponse;
-import com.example.codereviewstudy.domain.member.dto.response.MemberSignUpResponse;
 import com.example.codereviewstudy.domain.member.service.MemberService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -41,7 +40,7 @@ class MemberControllerTest {
         String nickName = "AAA";
         Long memberId = 1L;
         given(memberService.signUp(any())).willReturn(
-                new MemberSignUpResponse(memberId, email, nickName));
+                new MemberInfoResponse(memberId, email, nickName));
         //when
         //then
         mockMvc.perform(post("/signup")

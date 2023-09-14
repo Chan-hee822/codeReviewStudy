@@ -3,7 +3,6 @@ package com.example.codereviewstudy.domain.member.service;
 import com.example.codereviewstudy.domain.common.ErrorCode;
 import com.example.codereviewstudy.domain.member.dto.request.MemberSignUpRequest;
 import com.example.codereviewstudy.domain.member.dto.response.MemberInfoResponse;
-import com.example.codereviewstudy.domain.member.dto.response.MemberSignUpResponse;
 import com.example.codereviewstudy.domain.member.entity.Member;
 import com.example.codereviewstudy.domain.member.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
@@ -35,7 +34,7 @@ class MemberServiceTest {
                 1L, "AAA@AAA", "!234", "hong");
         given(memberRepository.save(any())).willReturn(member);
         //when
-        MemberSignUpResponse response = memberService.signUp(
+        MemberInfoResponse response = memberService.signUp(
                 new MemberSignUpRequest(
                         "BBB@BBB", "!@#$56", "gil"));
         //then

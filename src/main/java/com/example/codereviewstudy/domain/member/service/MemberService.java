@@ -3,7 +3,6 @@ package com.example.codereviewstudy.domain.member.service;
 import com.example.codereviewstudy.domain.common.ErrorCode;
 import com.example.codereviewstudy.domain.member.dto.request.MemberSignUpRequest;
 import com.example.codereviewstudy.domain.member.dto.response.MemberInfoResponse;
-import com.example.codereviewstudy.domain.member.dto.response.MemberSignUpResponse;
 import com.example.codereviewstudy.domain.member.entity.Member;
 import com.example.codereviewstudy.domain.member.repository.MemberRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ public class MemberService {
         this.memberRepository = memberRepository;
     }
 
-    public MemberSignUpResponse signUp(MemberSignUpRequest request) {
+    public MemberInfoResponse signUp(MemberSignUpRequest request) {
         boolean alreadyUseEmail = memberRepository.existsByEmail(request.getEmail());
         if (alreadyUseEmail) {
             ErrorCode.Duplicate_Email.throwException();
@@ -35,7 +34,7 @@ public class MemberService {
         String password = request.getPassword();
         String nickName = request.getNickname();
 
-        return MemberSignUpResponse.from(memberRepository
+        return MemberInfoResponse.from(memberRepository
                         .save(new Member(id, email, password, nickName)));
     }
 
