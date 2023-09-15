@@ -75,5 +75,5 @@
 
 ## 미션 4
 
--구현한 회원 CRUD 기능에 실제 DB를 붙힐 것, Spring Data JPA를 사용하도록 리팩토링
+- 구현한 회원 CRUD 기능에 실제 DB를 붙힐 것, Spring Data JPA를 사용하도록 리팩토링
 
